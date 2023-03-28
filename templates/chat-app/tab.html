@@ -1,0 +1,96 @@
+## mako
+<%! from django.utils.translation import ugettext as _ %>
+    <%!
+from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
+%>
+        <%namespace name='static' file='/static_content.html' />
+    <%inherit file="/main.html" />
+    <%block name="bodyclass">view-new_tab_type is-in-course course</%block>
+    <%block name="pagetitle">${_("Chat")}</%block>
+    <%block name="headextra">
+        <%static:css group='style-course' />
+    </%block>
+    <%include file="/courseware/course_navigation.html" args="active_page='PAGE-SLUG'" />
+
+
+    <div class="chat-wrapper">
+        <main id="main" aria-label="Content" tabindex="-1">
+            <section class="chat-content">
+                <link href="${configuration_helpers.get_value('GW_PORTAL_URL', '')}/app/gwchat/support.css" rel="stylesheet">
+                <script src="${configuration_helpers.get_value('GW_PORTAL_URL', '')}/app/gwchat/index.js"></script>
+
+                <div class="chat-app">
+                    <div class="grid" x-data="ChatManager()"
+                        x-init="init('${ course.id }', '${ configuration_helpers.get_value('GW_GCORE_URL', '') }')" x-cloak="">
+                        
+                        <div x-show="isChatEnabled" data-test-id="ChatButton" class="topButton w-8">
+                            Chat del Curso
+                            <hr>
+                        </div>
+
+                        <div x-show="hasNewMessage" x-on:click="getNewMessage(hasNewMessageUserId)"
+                            data-test-id="TeacherButton" class="warningButton hover:bg-red-500">
+                            Nuevo mensaje!
+                        </div>
+
+                        <div data-test-id="ChatBox" x-show="isChatEnabled" class="wrapper">
+                            <div class="wrapperHistory" x-ref="history" data-test-id="chatHistory">
+                                <template x-for="message in chatHistory">
+                                    <div :class="{ 'wrapperMessage--self' : message.self , 'wrapperMessage' : !message.self, 'wrapperMessage--staff' : message.staff }"
+                                        data-test-id="chatHistoryMessage">
+                                        <div
+                                            :class="{ 'contentMessage--self' : message.self , 'contentMessage' : !message.self}">
+                                            <div class="avatarBox">
+                                                <div x-text="message.name.substring(0, 2)" class="avatarLetters"></div>
+                                                <!-- <img class="message--avatar" :src="message.avatarUrl"></img> -->
+                                                <span x-show="isOnline(message.user_id)" class="isOnline"></span>
+                                            </div>
+                                            <div :class="{ 'message--self' : message.self , 'message' : !message.self}">
+                                                <div x-text="message.name" class="message--name"></div>
+                                                <div x-text="message.text"></div>
+                                                <div x-text="message.time" class="message--time"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template> 
+
+                            </div>
+                            <div class="wrapperUI">
+                                <div class="contentInputs">
+                                    <input type="text" class="focus:outline-none ml-2"
+                                        placeholder="Escribe un mensaje y [Enter]" x-model="messageInput"
+                                        @keydown.enter="sendMessage" x-ref="sendInput" maxlength="500"
+                                        data-test-id="sendInput">
+                                    <div class="contentUtils">
+                                        <div x-ref="emojiButton" class="emojiButton focus:outline-none"
+                                            x-on:click="emojiBox = !emojiBox" x-on:click.away="emojiBox = false"
+                                            data-test-id="emojiButton">
+                                            <span class="fa fa-smile-o" aria-hidden="true"></span>
+                                            <div class="emojiBox" x-show="emojiBox" data-test-id="emojiBox">
+                                                <template x-for="emoji in emojiList">
+                                                    <div x-text="emoji"
+                                                        x-on:click="messageInput = messageInput.concat(emoji)"
+                                                        data-test-id="emoji"></div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sendButton" x-on:click="sendMessage" x-ref="sendButton"
+                                    data-test-id="sendButton">
+                                    <svg class="w-5 h-5 transform rotate-90" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span x-show="!isChatEnabled" class="errorText">El Chat para este Curso no está habilitado.</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
