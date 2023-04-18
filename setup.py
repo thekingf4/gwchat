@@ -21,10 +21,10 @@ setuptools.setup(
     ],
     entry_points={
         "lms.djangoapp": [
-            "bbb_tab = gwchat.apps:GraspwayChatConfig",
+            "bbb_tab = gwchat_tab.apps:GraspwayChatConfig",
         ],
         "openedx.course_tab": [
-            "gwchat = gwchat.plugins:GraspwayChatTab",
+            "gwchat = gwchat_tab.plugins:GraspwayChatTab",
         ]
     },
 )
