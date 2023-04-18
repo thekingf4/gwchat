@@ -20,6 +20,9 @@ setuptools.setup(
         "Environment :: Web Environment",
     ],
     entry_points={
+        "lms.djangoapp": [
+            "bbb_tab = gwchat.apps:GraspwayChatConfig",
+        ],
         "openedx.course_tab": [
             "gwchat = gwchat.plugins:GraspwayChatTab",
         ]
