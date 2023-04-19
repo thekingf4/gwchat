@@ -24,7 +24,7 @@ setuptools.setup(
             "gwchat_tab = gwchat_tab.apps:GwChatConfig",
         ],
         "openedx.course_tab": [
-            "gwchat = gwchat_tab.plugins:GwChatTab",
+            "gwchat_tab = gwchat_tab.plugins:GwChatTab",
         ]
     },
 )
