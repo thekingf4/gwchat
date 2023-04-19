@@ -5,7 +5,7 @@ from django.apps import AppConfig
 from openedx.core.djangoapps.plugins.constants import PluginSettings, PluginURLs, ProjectType, SettingsType
 
 
-class GWCHATConfig(AppConfig):
+class GwChatConfig(AppConfig):
     name = 'gwchat_tab'
 
     plugin_app = {
