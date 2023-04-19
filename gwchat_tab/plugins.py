@@ -7,17 +7,12 @@ from django.utils.translation import ugettext_noop
 from lms.djangoapps.courseware.tabs import EnrolledTab
 from xmodule.tabs import TabFragmentViewMixin
 
-class BBBTab(TabFragmentViewMixin, EnrolledTab):
+class GwChatTab(TabFragmentViewMixin, EnrolledTab):
     type = 'gwchat_tab'
     title = ugettext_noop('Chat')
     priority = None
     view_name = 'gwchat_view'
     is_hideable = True
-    # is_default = True
-    # body_class = 'rocketchat'
-    # online_help_token = 'rocketchat'
-    # True if this tab should be displayed only for instructors
-    # course_staff_only = True
 
     @classmethod
     def is_enabled(cls, course, user=None):
