@@ -3,7 +3,7 @@
 
 from django.conf.urls import url
 from django.conf import settings
-from .views import GWCHATView
+from .views import GwChatView
 
 
 urlpatterns += (
@@ -11,7 +11,7 @@ urlpatterns += (
         r'^courses/{}/gwchat/'.format(
             settings.COURSE_ID_PATTERN,
         ),
-        GWCHATView.as_view(),
+        GwChatView.as_view(),
         name='gwchat_view',
    ),
  )
