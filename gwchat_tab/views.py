@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_noop
 # Create your views here.
 
 
-class GWCHATView(EdxFragmentView):
+class GwChatView(EdxFragmentView):
     def render_to_fragment(self, request, course_id, **kwargs):
 
         course_key = CourseKey.from_string(course_id)
