@@ -5,7 +5,7 @@ from django.conf.urls import url
 from django.conf import settings
 from .views import GwChatView
 
-urlpatterns += (
+urlpatterns = (
     url(
         r'^courses/{}/gwchat/'.format(
             settings.COURSE_ID_PATTERN,
