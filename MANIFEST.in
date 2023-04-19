@@ -1,4 +1,4 @@
 include LICENSE.txt
 include README.md
-recursive-include gwchat/templates *
-recursive-include gwchat/static *
+recursive-include gwchat_tab/templates *
+recursive-include gwchat_tab/static *
