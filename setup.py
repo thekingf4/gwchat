@@ -4,11 +4,10 @@
 import setuptools
 
 setuptools.setup(
-    name="gwchat",
-    version="0.1.",
+    name="gwchat_tab",
+    version="0.2.",
     license="MIT",
     description="gwchat Open edX course_tab",
-    # url="https://github.com/tony-h/rocketchat-tab",
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[

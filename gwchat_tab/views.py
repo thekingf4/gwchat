@@ -31,7 +31,7 @@ class GwChatView(EdxFragmentView):
         }
 
         html = render_to_string(
-            'bbb_chat/bbb_chat.html', context, )
+            'gwchat_chat/gwchat_tab.html', context, )
 
         fragment = Fragment(html)
         return fragment
