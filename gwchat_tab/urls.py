@@ -7,7 +7,7 @@ from .views import GwChatView
 
 urlpatterns = (
     url(
-        r'courses/{}/gwchat$'.format(
+        r'courses/{}/chat$'.format(
             settings.COURSE_ID_PATTERN,
         ),
         GwChatView.as_view(),
