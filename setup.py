@@ -5,7 +5,7 @@ import setuptools
 
 setuptools.setup(
     name="gwchat_tab",
-    version="0.2.",
+    version="0.3",
     license="MIT",
     description="gwchat Open edX course_tab",
     packages=setuptools.find_packages(),
