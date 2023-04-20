@@ -20,7 +20,6 @@ class GwChatView(EdxFragmentView):
         display_name_course = course.display_name
         
 
-        # For bbb_chat.html
         context = {
             "course": course,           # must in the root level to avoid "proctored exam error"
             "course_info": {
